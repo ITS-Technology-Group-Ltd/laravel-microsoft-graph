@@ -18,10 +18,18 @@ class Emails extends MsGraphAdmin
     private $cc;
     private $bcc;
     private $attachments;
+    private $mailfolderId = 'inbox';
 
     public function userid($userId)
     {
         $this->userId = $userId;
+
+        return $this;
+    }
+
+    public function mailfolderId($mailfolderId)
+    {
+        $this->mailfolderId = $mailfolderId;
 
         return $this;
     }
@@ -116,8 +124,7 @@ class Emails extends MsGraphAdmin
             $params = http_build_query($params);
         }
 
-        //get messages from folderId
-        $emails = MsGraphAdmin::get('users/'.$this->userId.'/messages?'.$params);
+        $emails = MsGraphAdmin::get('users/'.$this->userId.'/mailFolders/'.$this->mailfolderId.'/messages?'.$params);
 
         $data = MsGraphAdmin::getPagination($emails, $top, $skip);
 
