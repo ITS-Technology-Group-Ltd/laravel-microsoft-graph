@@ -72,8 +72,8 @@ class MsGraphAdmin
         try {
             $params = [
                 'scope'         => 'https://graph.microsoft.com/.default',
-                'client_id'     => config('msgraph.clientId'),
-                'client_secret' => config('msgraph.clientSecret'),
+                'client_id'     => config('msgraph.adminClientId'),
+                'client_secret' => config('msgraph.adminClientSecret'),
                 'grant_type'    => 'client_credentials',
             ];
 
