@@ -19,6 +19,7 @@ class Emails extends MsGraphAdmin
     private $bcc;
     private $attachments;
     private $mailfolderId = 'inbox';
+    private $attachmentName;
 
     public function userid($userId)
     {
@@ -83,10 +84,10 @@ class Emails extends MsGraphAdmin
         return $this;
     }
 
-    public function attachments(array $attachments)
+    public function attachments(array $attachments, string $attachmentName)
     {
         $this->attachments = $attachments;
-
+        $this->attachmentName = $attachmentName;
         return $this;
     }
 
@@ -252,6 +253,7 @@ class Emails extends MsGraphAdmin
         $cc          = $this->cc;
         $bcc         = $this->bcc;
         $attachments = $this->attachments;
+        $attachmentName = $this->attachmentName;
 
         $toArray = [];
         if ($to != null) {
@@ -281,7 +283,7 @@ class Emails extends MsGraphAdmin
 
                 $attachmentarray[] = [
                     '@odata.type'  => '#microsoft.graph.fileAttachment',
-                    'name'         => $path['basename'],
+                    'name'         => $attachmentName,
                     'contentType'  => mime_content_type($file),
                     'contentBytes' => base64_encode(file_get_contents($file)),
                 ];
