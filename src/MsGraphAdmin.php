@@ -195,7 +195,7 @@ class MsGraphAdmin
                 'headers' => [
                     'Authorization' => 'Bearer '.$this->getAccessToken(),
                     'content-type'  => 'application/json',
-                    'Prefer'        => config('msgraph.preferTimezone'),
+                    'Prefer'        => ['IdType="ImmutableId"', config('msgraph.preferTimezone')],
                 ],
                 'body' => json_encode($data),
             ]);
